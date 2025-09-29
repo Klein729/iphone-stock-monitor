@@ -1,8 +1,8 @@
 name: Check iPhone Stock
 
 on:
-  schedule:
-    - cron: '0 * * * *'  # 每小时运行一次，具体时间根据需要调整
+  #schedule:
+   # - cron: '0 * * * *'  # 每小时运行一次，具体时间根据需要调整
   workflow_dispatch:  # 允许手动触发工作流
 
 jobs:
