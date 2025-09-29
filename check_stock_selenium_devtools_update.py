@@ -46,7 +46,16 @@ def make_driver(headless=True):
 
     # 启动 driver
     service = Service()  # 你可以传入 chromedriver 路径或环境变量自动寻找
-    driver = webdriver.Chrome(service=service, options=chrome_options, desired_capabilities=caps)
+
+    chrome_options.set_capability("goog:loggingPrefs", {"performance": "ALL"})
+
+    driver = webdriver.Chrome(
+        service=service,
+        options=chrome_options
+    )
+
+    
+    # driver = webdriver.Chrome(service=service, options=chrome_options, desired_capabilities=caps)
 
     # 可选：利用 CDP 接口启用 network 域（部分场景需要主动启用）
     try:
