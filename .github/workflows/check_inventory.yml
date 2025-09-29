@@ -23,25 +23,24 @@ jobs:
       # 3. 安装依赖
       - name: Install dependencies
         run: |
-          sudo apt update
-          sudo apt install -y wget curl unzip
-          sudo apt install -y libgdk-pixbuf2.0-0
-          sudo apt install -y libx11-xcb1 libxcomposite1 libxdamage1 libxi6 libxtst6
-          sudo apt install -y fonts-liberation
-          sudo apt install -y libappindicator3-1 libnss3 libnspr4 libgbm1
-          sudo apt install -y libxrandr2
-          # 下载并安装 Chrome 浏览器
+          sudo apt-get update
+          sudo apt-get install -y wget curl unzip libgdk-pixbuf2.0-0 libx11-xcb1 libxcomposite1 libxdamage1 libxi6 libxtst6 fonts-liberation libappindicator3-1 libnss3 libnspr4 libgbm1 libxrandr2
           curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o google-chrome.deb
-          sudo dpkg -i google-chrome.deb
-          sudo apt install -f
-          # 安装 Python 依赖
-          pip install -r requirements.txt  # 假设你把所有依赖写入了 requirements.txt 文件
+          sudo dpkg -i google-chrome.deb || sudo apt-get -f install -y
+          pip install -r requirements.txt  # 安装所有 Python 依赖
 
-      # 4. 运行脚本
+      # 4. 检查 Chrome 版本
+      - name: Check Chrome version
+        run: google-chrome-stable --version
+
+      # 5. 使用 browser-actions/setup-chrome 来自动安装 Chrome 和对应的驱动
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      # 6. 运行脚本
       - name: Run inventory check script
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}  # 从 GitHub Secrets 中读取 Telegram token
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}  # 从 GitHub Secrets 中读取 Telegram chat ID
         run: |
           python check_inventory.py  # 运行脚本（假设脚本名是 check_inventory.py）
-
