@@ -68,6 +68,7 @@ def send_telegram_message(message):
 # 获取库存信息
 def get_stock_info(driver, model, store):
     url = f'https://www.apple.com/sg/shop/fulfillment-messages?pl=true&parts.0={model}&store={store}'
+    print(f"URL : {url}")
     driver.get(url)
     
     time.sleep(2)  # 等待页面加载
