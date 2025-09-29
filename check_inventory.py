@@ -15,14 +15,33 @@ TELEGRAM_API_URL = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
 
 # 配置 iPhone 型号与门店信息
 IPHONE_MODELS = {
-    "Cosmic Orange 256GB": "MFYN4X/A",
-    "Deep Blue 256GB": "MG8J4X/A",
     "???": "MYE93ZP/A"
 }
 
-STORES = ["R669","R633", "R641", "R625"]
+    #"Cosmic Orange 256GB": "MFYN4X/A",
+    #"Deep Blue 256GB": "MG8J4X/A",
+
+STORES = ["R669"]
+#STORES = ["R669","R633", "R641", "R625"]
+
+logging.basicConfig(level=logging.INFO)
+
+def get_chrome_driver(headless=True):
+    chrome_options = Options()
+    if headless:
+        chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    
+    # 强制重新安装 ChromeDriver
+    driver_path = ChromeDriverManager().install()
+    logging.debug(f"Using ChromeDriver: {driver_path}")
+    
+    driver = webdriver.Chrome(service=Service(driver_path), options=chrome_options)
+    return driver
 
 # 设置 Chrome 浏览器选项
+'''
 def get_chrome_driver(headless=True):
     chrome_options = Options()
     if headless:
@@ -34,7 +53,7 @@ def get_chrome_driver(headless=True):
     
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     return driver
-
+'''
 
 # 发送 Telegram 消息
 def send_telegram_message(message):
