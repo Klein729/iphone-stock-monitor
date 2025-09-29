@@ -80,7 +80,7 @@ def send_telegram_message(message):
 def get_stock_info(driver, model, store):
     # 1. 先访问商品页面（建立 cookies、referer 等上下文）
     product_url = "https://www.apple.com/sg/shop/buy-iphone/iphone-17-pro"
-    logging.info(f"Visiting product page: {product_url}")
+    # logging.info(f"Visiting product page: {product_url}")
     driver.get(product_url)
     time.sleep(3)  # 等待页面 JS 加载并种下 Cookie
     
