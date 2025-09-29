@@ -82,7 +82,8 @@ def get_stock_info(driver, model, store):
     product_url = "https://www.apple.com/sg/shop/buy-iphone/iphone-17-pro"
     # logging.info(f"Visiting product page: {product_url}")
     driver.get(product_url)
-    time.sleep(3)  # 等待页面 JS 加载并种下 Cookie
+    time.sleep(10)  # 等待页面 JS 加载并种下 Cookie
+    print(f"first_loading_page_content : {driver.page_source}")
     
     url = f'https://www.apple.com/sg/shop/fulfillment-messages?pl=true&parts.0={model}&store={store}'
     print(f"URL : {url}")
@@ -92,6 +93,7 @@ def get_stock_info(driver, model, store):
     
     # 获取页面内容
     page_content = driver.page_source
+    print(f"start_index : {page_content}")
     try:
         
         # 尝试解析 JSON 内容
