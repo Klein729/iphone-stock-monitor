@@ -24,7 +24,7 @@ IPHONE_MODELS = {
 STORES = ["R669"]
 #STORES = ["R669","R633", "R641", "R625"]
 
-logging.basicConfig(level=logging.INFO)
+#logging.basicConfig(level=logging.INFO)
 
 def get_chrome_driver(headless=True):
     chrome_options = Options()
