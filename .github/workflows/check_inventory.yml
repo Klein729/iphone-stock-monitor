@@ -28,7 +28,7 @@ jobs:
           sudo apt install -y libgdk-pixbuf2.0-0
           sudo apt install -y libx11-xcb1 libxcomposite1 libxdamage1 libxi6 libxtst6
           sudo apt install -y fonts-liberation
-          sudo apt install -y libappindicator3-1 libasound2 libnss3 libnspr4 libgbm1
+          sudo apt install -y libappindicator3-1 libasound2t0 libnss3 libnspr4 libgbm1
           sudo apt install -y libxrandr2
           # 下载并安装 Chrome 浏览器
           curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o google-chrome.deb
