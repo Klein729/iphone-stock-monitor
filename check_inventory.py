@@ -35,7 +35,7 @@ def get_chrome_driver(headless=True):
     
     # 强制重新安装 ChromeDriver
     driver_path = ChromeDriverManager().install()
-    logging.debug(f"Using ChromeDriver: {driver_path}")
+    #logging.debug(f"Using ChromeDriver: {driver_path}")
     
     driver = webdriver.Chrome(service=Service(driver_path), options=chrome_options)
     return driver
