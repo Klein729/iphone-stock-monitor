@@ -1,0 +1,47 @@
+name: Check iPhone Stock
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 每小时运行一次，具体时间根据需要调整
+  workflow_dispatch:  # 允许手动触发工作流
+
+jobs:
+  check-stock:
+    runs-on: ubuntu-latest  # 使用 GitHub 提供的最新 Ubuntu 环境
+
+    steps:
+      # 1. 获取代码
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # 2. 设置 Python 环境
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # 使用 Python 3.9，确保兼容
+
+      # 3. 安装依赖
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y wget curl unzip
+          sudo apt install -y libgdk-pixbuf2.0-0
+          sudo apt install -y libx11-xcb1 libxcomposite1 libxdamage1 libxi6 libxtst6
+          sudo apt install -y fonts-liberation
+          sudo apt install -y libappindicator3-1 libasound2 libnss3 libnspr4 libgbm1
+          sudo apt install -y libxrandr2
+          # 下载并安装 Chrome 浏览器
+          curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o google-chrome.deb
+          sudo dpkg -i google-chrome.deb
+          sudo apt install -f
+          # 安装 Python 依赖
+          pip install -r requirements.txt  # 假设你把所有依赖写入了 requirements.txt 文件
+
+      # 4. 运行脚本
+      - name: Run inventory check script
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}  # 从 GitHub Secrets 中读取 Telegram token
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}  # 从 GitHub Secrets 中读取 Telegram chat ID
+        run: |
+          python check_inventory.py  # 运行脚本（假设脚本名是 check_inventory.py）
+
