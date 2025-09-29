@@ -16,10 +16,11 @@ TELEGRAM_API_URL = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
 # 配置 iPhone 型号与门店信息
 IPHONE_MODELS = {
     "Cosmic Orange 256GB": "MFYN4X/A",
-    "Deep Blue 256GB": "MG8J4X/A"
+    "Deep Blue 256GB": "MG8J4X/A",
+    "???": "MYE93ZP/A"
 }
 
-STORES = ["R633", "R641", "R625"]
+STORES = ["R669","R633", "R641", "R625"]
 
 # 设置 Chrome 浏览器选项
 def get_chrome_driver(headless=True):
