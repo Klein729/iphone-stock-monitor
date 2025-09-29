@@ -78,13 +78,19 @@ def get_stock_info(driver, model, store):
     try:
         # 尝试解析 JSON 内容
         start_index = page_content.find('var fulfillmentMessages = ') + len('var fulfillmentMessages = ')
+        print(f"start_index : {start_index}")
         end_index = page_content.find(';</script>', start_index)
+        print(f"end_index : {end_index}")
         json_content = page_content[start_index:end_index]
+        print(f"json_content : {json_content}")
         stock_data = json.loads(json_content)
+        print(f"stock_data : {stock_data}")
         
         # 提取库存信息
         delivery_message = stock_data.get('deliveryMessage', None)
+        print(f"delivery_message : {delivery_message}")
         pickup_message = stock_data.get('pickupMessage', None)
+        print(f"pickup_message : {pickup_message}")
         
         if delivery_message:
             return f"Delivery: {delivery_message}"
